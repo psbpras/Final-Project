@@ -73,6 +73,32 @@ async def test_create_user_duplicate_email(async_client, verified_user):
     assert "Email already exists" in response.json().get("detail", "")
 
 @pytest.mark.asyncio
+async def test_create_user_sns_test4(async_client, verified_user):
+    user_data = {
+        "email": "hohn12@example.com",
+        "password": "AnotherPassword123!",
+        "role": UserRole.ADMIN.name,
+        "linkedin_profile_url": "https://linkedin.com/in/johndoe",
+        "github_profile_url": "https://github.com/johndoe"
+    }
+    response = await async_client.post("/register/", json=user_data)
+    assert response.status_code == 200
+    assert "https://linkedin.com/in/johndoe" in response.json().get("linkedin_profile_url", "")
+
+@pytest.mark.asyncio
+async def test_create_user_sns_test5(async_client, verified_user):
+    user_data = {
+        "email": "hohn12@example.com",
+        "password": "AnotherPassword123!",
+        "role": UserRole.ADMIN.name,
+        "linkedin_profile_url": "https://linkedin.com/in/johndoe",
+        "github_profile_url": "https://github.com/johndoe"
+    }
+    response = await async_client.post("/register/", json=user_data)
+    assert response.status_code == 200
+    assert "https://github.com/johndoe" in response.json().get("github_profile_url", "")
+
+@pytest.mark.asyncio
 async def test_create_user_invalid_email(async_client):
     user_data = {
         "email": "notanemail",
