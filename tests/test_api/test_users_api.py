@@ -51,6 +51,17 @@ async def test_update_user_email_access_allowed(async_client, admin_user, admin_
     assert response.status_code == 200
     assert response.json()["email"] == updated_data["email"]
 
+@pytest.mark.asyncio
+async def test_update_URL_test14(async_client, admin_user, admin_token):
+    updated_data = {
+        "email": f"updated_{admin_user.id}@example.com",
+        "github_profile_url": ""
+        }
+    headers = {"Authorization": f"Bearer {admin_token}"}
+    response = await async_client.put(f"/users/{admin_user.id}", json=updated_data, headers=headers)
+    assert response.status_code == 200
+    assert response.json()["github_profile_url"] == None
+
 
 @pytest.mark.asyncio
 async def test_delete_user(async_client, admin_user, admin_token):
