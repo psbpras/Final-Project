@@ -1,10 +1,12 @@
 from builtins import range
 import pytest
 from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 from app.dependencies import get_settings
 from app.models.user_model import User, UserRole
 from app.services.user_service import UserService
 from app.utils.nickname_gen import generate_nickname
+from app.schemas.user_schemas import accepted_image_format
 
 pytestmark = pytest.mark.asyncio
 
@@ -64,13 +66,23 @@ async def test_get_by_email_user_does_not_exist(db_session):
 # Test updating a user with valid data
 async def test_update_user_valid_data(db_session, user):
     new_email = "updated_email@example.com"
-    updated_user = await UserService.update(db_session, user.id, {"email": new_email})
-    assert updated_user is not None
-    assert updated_user.email == new_email
+    updated_user = await UserService.update(db_session, user.email, user.id, {"email": new_email})
+    assert isinstance(updated_user, User), "Update function should return a User object or None"
+    assert updated_user.email == new_email, "Email should be updated to the new value"
+
+@pytest.mark.asyncio
+async def test_check_profile_pic_extension():
+    user_service = UserService()  # Instantiate the UserService class
+    session = AsyncSession()
+    # Test valid file extensions
+    for ext in accepted_image_format:
+        url = f"http://example.com/profile.{ext}"
+        assert await user_service.check_profile_pic_extension(session, url), f"Valid URL {url} failed to pass."
 
 # Test updating a user with invalid data
 async def test_update_user_invalid_data(db_session, user):
-    updated_user = await UserService.update(db_session, user.id, {"email": "invalidemail"})
+    email = {"email": "updated_email3@example.com"}
+    updated_user = await UserService.update(db_session,email, user.id, {"email": "invalidemail"})
     assert updated_user is None
 
 # Test deleting a user who exists
