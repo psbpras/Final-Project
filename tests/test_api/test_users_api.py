@@ -116,7 +116,7 @@ async def test_create_user_sns_test4(async_client, verified_user):
 @pytest.mark.asyncio
 async def test_create_user_sns_test5(async_client, verified_user):
     user_data = {
-        "email": "hohn12@example.com",
+        "email": "hohn16@example.com",
         "password": "AnotherPassword123!",
         "role": UserRole.ADMIN.name,
         "linkedin_profile_url": "https://linkedin.com/in/johndoe",
