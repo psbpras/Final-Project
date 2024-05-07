@@ -2,9 +2,11 @@ from builtins import range
 import pytest
 from sqlalchemy import select
 from app.dependencies import get_settings
+from sqlalchemy.ext.asyncio import AsyncSession
 from app.models.user_model import User, UserRole
 from app.services.user_service import UserService
 from app.utils.nickname_gen import generate_nickname
+from app.schemas.user_schemas import accepted_image_format
 
 pytestmark = pytest.mark.asyncio
 
@@ -68,6 +70,14 @@ async def test_update_user_valid_data(db_session, user):
     assert isinstance(updated_user, User), "Update function should return a User object or None"
     assert updated_user.email == new_email, "Email should be updated to the new value"
 
+@pytest.mark.asyncio
+async def test_check_profile_pic_extension():
+    user_service = UserService()  # Instantiate the UserService class
+    session = AsyncSession()
+    # Test valid file extensions
+    for ext in accepted_image_format:
+        url = f"http://example.com/profile.{ext}"
+        assert await user_service.check_profile_pic_extension(session, url), f"Valid URL {url} failed to pass."
 
 # Test updating a user with invalid data
 async def test_update_user_invalid_data(db_session, user):
