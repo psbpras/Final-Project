@@ -62,7 +62,6 @@ async def test_update_URL_test14(async_client, admin_user, admin_token):
     assert response.status_code == 200
     assert response.json()["github_profile_url"] == None
 
-=======
 async def test_update_user_email_access_Not_allowed_test2(async_client, admin_user, verified_user, admin_token):
     updated_data = {"email": f"updated_{admin_user.id}@example.com"}
     headers = {"Authorization": f"Bearer {admin_token}"}

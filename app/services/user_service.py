@@ -15,11 +15,19 @@ from uuid import UUID
 from app.services.email_service import EmailService
 from app.models.user_model import UserRole
 import logging
+import re
 
 settings = get_settings()
 logger = logging.getLogger(__name__)
 
 class UserService:
+    @classmethod
+    async def check_profile_pic_extension(cls, session: AsyncSession, profile_picture_url: str) -> bool:
+        accepted_image_format = ["png", "jpg", "jpeg"]
+        if not re.search(rf"\.({'|'.join(accepted_image_format)})$", profile_picture_url, re.IGNORECASE):
+            return False
+        return True
+
     @classmethod
     async def _execute_query(cls, session: AsyncSession, query):
         try:
