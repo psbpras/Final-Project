@@ -22,6 +22,7 @@ async def test_create_user_access_denied(async_client, user_token, email_service
     # Asserts
     assert response.status_code == 403
 
+
 # You can similarly refactor other test functions to use the async_client fixture
 @pytest.mark.asyncio
 async def test_retrieve_user_access_denied(async_client, verified_user, user_token):
@@ -62,7 +63,8 @@ async def test_update_URL_test14(async_client, admin_user, admin_token):
     assert response.status_code == 200
     assert response.json()["github_profile_url"] == None
 
-=======
+
+@pytest.mark.asyncio
 async def test_update_user_email_access_Not_allowed_test2(async_client, admin_user, verified_user, admin_token):
     updated_data = {"email": f"updated_{admin_user.id}@example.com"}
     headers = {"Authorization": f"Bearer {admin_token}"}
@@ -114,7 +116,7 @@ async def test_create_user_sns_test4(async_client, verified_user):
 @pytest.mark.asyncio
 async def test_create_user_sns_test5(async_client, verified_user):
     user_data = {
-        "email": "hohn12@example.com",
+        "email": "hohn16@example.com",
         "password": "AnotherPassword123!",
         "role": UserRole.ADMIN.name,
         "linkedin_profile_url": "https://linkedin.com/in/johndoe",

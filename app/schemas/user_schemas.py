@@ -33,6 +33,8 @@ class UserBase(BaseModel):
     class Config:
         from_attributes = True
 
+accepted_image_format = ["png", "jpg", "jpeg"]
+
 class UserCreate(UserBase):
     email: EmailStr = Field(..., example="john.doe@example.com")
     password: str = Field(..., example="Secure*1234")
@@ -47,6 +49,13 @@ class UserUpdate(UserBase):
     linkedin_profile_url: Optional[str] =Field(None, example="https://linkedin.com/in/johndoe")
     github_profile_url: Optional[str] = Field(None, example="https://github.com/johndoe")
     role: Optional[str] = Field(None, example="AUTHENTICATED")
+
+    @validator("profile_picture_url")
+    def check_profile_pic_extension(cls, value):
+        if value:
+            if not re.search(rf"\.({'|'.join(accepted_image_format)})$", value, re.IGNORECASE):  # Ensure the URL ends with an allowed image extension
+                raise ValueError("picture should be of type jpeg, png or jpeg")
+        return value
 
     @root_validator(pre=True)
     def check_at_least_one_value(cls, values):
