@@ -23,7 +23,7 @@ async def test_create_user_access_denied(async_client, user_token, email_service
     assert response.status_code == 403
 
 
-# You can similarly refactor other test functions to use the async_client fixture
+# You can similarly refactor the other test functions to use the async_client fixture
 @pytest.mark.asyncio
 async def test_retrieve_user_access_denied(async_client, verified_user, user_token):
     headers = {"Authorization": f"Bearer {user_token}"}
