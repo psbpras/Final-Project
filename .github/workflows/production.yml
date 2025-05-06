@@ -76,7 +76,7 @@ jobs:
           push: true
           tags: lakshmiprasanna111/final_project_user_management:${{ github.sha }} # Uses the Git SHA for tagging
           platforms: linux/amd64,linux/arm64 # Multi-platform support
-          cache-from: type=registry,ref=srivatsan1303/final_project_user_management:cache
+          cache-from: type=registry,ref=lakshmiprasanna111/final_project_user_management:cache
           cache-to: type=inline,mode=max
           
       - name: Scan the Docker image
