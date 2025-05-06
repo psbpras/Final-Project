@@ -100,7 +100,7 @@ class UserService:
             else:
                 logger.error(f"User {user_id} not found after update attempt.")
             return None
-        except Exception as e:  # Broad exception handling for debugging
+        except Exception as e:  # Broad the exception handling for debugging
             logger.error(f"Error during user update: {e}")
             return None
 
@@ -196,7 +196,7 @@ class UserService:
         user = await cls.get_by_id(session, user_id)
         if user and user.is_locked:
             user.is_locked = False
-            user.failed_login_attempts = 0  # Optionally reset failed login attempts
+            user.failed_login_attempts = 0  # Optionally reset the failed login attempts
             session.add(user)
             await session.commit()
             return True
