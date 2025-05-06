@@ -71,7 +71,7 @@ async def get_user(user_id: UUID, request: Request, db: AsyncSession = Depends(g
         links=create_user_links(user.id, request)  
     )
 
-# Additional endpoints for update, delete, create, and list users follow a similar pattern, using
+# Additional endpoint for update, delete, create, and list users follow a similar pattern, using
 # asynchronous database operations, handling security with OAuth2PasswordBearer, and enhancing response
 # models with dynamic HATEOAS links.
 
