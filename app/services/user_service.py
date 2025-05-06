@@ -178,7 +178,7 @@ class UserService:
         user = await cls.get_by_id(session, user_id)
         if user and user.verification_token == token:
             user.email_verified = True
-            user.verification_token = None  # Clear the token once used
+            user.verification_token = None  # Clear token once used
             user.role = UserRole.AUTHENTICATED
             session.add(user)
             await session.commit()
