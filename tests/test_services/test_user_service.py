@@ -43,7 +43,7 @@ async def test_get_by_id_user_does_not_exist(db_session):
     retrieved_user = await UserService.get_by_id(db_session, non_existent_user_id)
     assert retrieved_user is None
 
-# Test fetching a user by nickname when the user exists
+# Test fetching a user by nickname when the user exist
 async def test_get_by_nickname_user_exists(db_session, user):
     retrieved_user = await UserService.get_by_nickname(db_session, user.nickname)
     assert retrieved_user.nickname == user.nickname

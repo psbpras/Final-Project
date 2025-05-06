@@ -146,6 +146,7 @@ async def test_email_verification_test1(db_session: AsyncSession, user: User):
     Tests the email verification functionality.
     """
     # Initially, the email should not be verified.
+    
     # Verify the email and check.
     user.verify_email()
     await db_session.commit()

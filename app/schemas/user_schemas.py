@@ -53,7 +53,7 @@ class UserUpdate(UserBase):
     @validator("profile_picture_url")
     def check_profile_pic_extension(cls, value):
         if value:
-            if not re.search(rf"\.({'|'.join(accepted_image_format)})$", value, re.IGNORECASE):  # Ensure the URL ends with an allowed image extension
+            if not re.search(rf"\.({'|'.join(accepted_image_format)})$", value, re.IGNORECASE):  # Ensure the URL ends with allowed image extension
                 raise ValueError("picture should be of type jpeg, png or jpeg")
         return value
 
