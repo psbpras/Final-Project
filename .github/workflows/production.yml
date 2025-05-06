@@ -13,8 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.10] # Define Python versions here, changed to 3.10
-
+        python-version: [3.10.12] # Define Python versions here
     services:
       postgres:
         image: postgres:latest
@@ -25,7 +24,6 @@ jobs:
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-
     steps:
       - uses: actions/checkout@v4
       
