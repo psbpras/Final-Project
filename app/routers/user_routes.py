@@ -47,7 +47,7 @@ async def get_user(user_id: UUID, request: Request, db: AsyncSession = Depends(g
     Args:
         user_id: UUID of the user to fetch.
         request: The request object, used to generate full URLs in the response.
-        db: Dependency that provides an AsyncSession for database access.
+        db: Dependency that provides an AsyncSession for database  access.
         token: The OAuth2 access token obtained through OAuth2PasswordBearer dependency.
     """
     user = await UserService.get_by_id(db, user_id)
