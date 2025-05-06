@@ -33,7 +33,10 @@ Changes to the code have fixed the problem. Only jpeg, png, and jpg file formats
 
 ### Docker Image Output
 - [Docker Image Link] (https://hub.docker.com/repository/docker/lakshmiprasanna111/final_project_user_management/general)
-  
+
+<img width="958" alt="{48B61F4F-1CDE-4706-B36B-4A4352B34DF9}" src="https://github.com/user-attachments/assets/bd763af2-a23f-4474-b635-00b2529a3f6b" />
+
+
 This documentation details the resolutions and enhancements made during the development process, ensuring each feature operates as intended and enhances the overall functionality of the user management system.
 
 
